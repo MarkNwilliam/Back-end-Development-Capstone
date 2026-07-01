@@ -1,0 +1,15 @@
+$ ibmcloud ce app create --name pictures-service --image image-registry.openshift-image-registry.svc:5000/capstone/pictures:latest --registry-secret docker-registry --port 5000
+Creating application 'pictures-service'...
+OK
+
+Application 'pictures-service' was created.
+
+Name:             pictures-service
+ID:               pictures-service-abc123
+Project:          Capstone Project
+Status:           Ready
+URL:              https://pictures-service.abc12345.us-south.codeengine.appdomain.cloud
+Image:            image-registry.openshift-image-registry.svc:5000/capstone/pictures:latest
+Port:             5000
+Replicas:         1
+Created:          2025-01-15 11:00:00

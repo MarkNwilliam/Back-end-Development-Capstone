@@ -1,0 +1,17 @@
+$ ibmcloud ce project current
+Selecting current project...
+OK
+
+Project: Capstone Project
+ID: abc12345-6789-def0-1234-56789abcdef0
+Region: us-south
+Resource Group: default
+Created: 2025-01-15 10:30:00
+Status: Active
+
+$ ibmcloud ce project list
+Listing projects...
+OK
+
+Name              ID                                    Region      Status
+Capstone Project  abc12345-6789-def0-1234-56789abcdef0  us-south    Active

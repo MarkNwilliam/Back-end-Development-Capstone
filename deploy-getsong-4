@@ -1,0 +1,6 @@
+$ oc expose service/songs-service --name=songs-route
+route.route.openshift.io/songs-route exposed
+
+$ oc get routes
+NAME          HOST/PORT                                         PATH  SERVICES        PORT       TERMINATION   WILDCARD
+songs-route   songs-route-capstone.router.default.svc.cluster.local       songs-service   5000-tcp                 None

@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: capstone-django
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: capstone-django
+  template:
+    metadata:
+      labels:
+        app: capstone-django
+    spec:
+      containers:
+      - name: capstone-django
+        image: capstone-django:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8000
+        env:
+        - name: DJANGO_SUPERUSER_USERNAME
+          value: admin
+        - name: DJANGO_SUPERUSER_PASSWORD
+          value: admin123
+        - name: DJANGO_SUPERUSER_EMAIL
+          value: admin@example.com
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: capstone-django
+spec:
+  selector:
+    app: capstone-django
+  ports:
+  - port: 8000
+    targetPort: 8000
+  type: LoadBalancer

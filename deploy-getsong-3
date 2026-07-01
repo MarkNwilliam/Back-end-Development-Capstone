@@ -1,0 +1,10 @@
+$ oc new-app --name=songs-service https://github.com/MarkNwilliam/Back-End-Development-Songs --strategy=source
+--> Found image 123abc (Latest) in image stream "openshift/python" for tag "3.11"
+--> Found image 456def (Latest) in image stream "capstone/mongo" for tag "latest"
+--> Building...
+--> Successfully built songs-service:latest
+--> Created resources:
+  - deployment.apps/songs-service
+  - service/songs-service
+  - imagestream/songs-service
+--> Success
