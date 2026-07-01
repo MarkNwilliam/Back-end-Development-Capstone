@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}Photos - Capstone Project{% endblock %}
+
+{% block content %}
+<h1>Photo Gallery</h1>
+<p class="text-muted">Photos from our concerts and events.</p>
+
+<div class="row">
+    {% for photo in photos %}
+    <div class="col-md-4 mb-4">
+        <div class="card">
+            <img src="{{ photo.image_url }}" class="card-img-top" alt="{{ photo.title }}">
+            <div class="card-body">
+                <h5 class="card-title">{{ photo.title }}</h5>
+                {% if photo.description %}
+                <p class="card-text">{{ photo.description }}</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <div class="col">
+        <div class="alert alert-info">
+            No photos available yet. Check back later.
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

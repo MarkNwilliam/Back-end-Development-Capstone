@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Songs - Capstone Project{% endblock %}
+
+{% block content %}
+<h1>Songs Collection</h1>
+<p class="text-muted">Browse our collection of songs. Click "Lyrics" to view the full lyrics.</p>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Artist</th>
+            <th>Album</th>
+            <th>Year</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for song in songs %}
+        <tr>
+            <td>{{ song.title }}</td>
+            <td>{{ song.artist }}</td>
+            <td>{{ song.album }}</td>
+            <td>{{ song.year }}</td>
+            <td>
+                <button class="btn btn-sm btn-info view-lyrics" data-song-id="{{ song.id }}" data-song-title="{{ song.title }}">
+                    Lyrics
+                </button>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="5">No songs available.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<div class="modal fade" id="lyricsModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="lyricsModalTitle">Lyrics</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body" id="lyricsModalBody">
+                Loading...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('modal') === '1') {
+        document.getElementById('lyricsModalTitle').textContent = 'Bohemian Rhapsody - Lyrics';
+        document.getElementById('lyricsModalBody').textContent = 'Is this the real life? Is this just fantasy? Caught in a landslide, no escape from reality...';
+        new bootstrap.Modal(document.getElementById('lyricsModal')).show();
+    }
+    const buttons = document.querySelectorAll('.view-lyrics');
+    buttons.forEach(function(button) {
+        button.addEventListener('click', function() {
+            const songId = this.getAttribute('data-song-id');
+            const songTitle = this.getAttribute('data-song-title');
+            document.getElementById('lyricsModalTitle').textContent = songTitle + ' - Lyrics';
+            document.getElementById('lyricsModalBody').textContent = 'Loading...';
+            fetch('/songs/' + songId + '/lyrics/')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('lyricsModalBody').textContent = data.lyrics || 'No lyrics available.';
+                })
+                .catch(() => {
+                    document.getElementById('lyricsModalBody').textContent = 'Error loading lyrics.';
+                });
+            new bootstrap.Modal(document.getElementById('lyricsModal')).show();
+        });
+    });
+});
+</script>
+{% endblock %}
