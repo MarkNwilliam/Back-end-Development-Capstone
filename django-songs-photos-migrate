@@ -1,6 +1,4 @@
-songs
- [X] 0001_initial
- [X] 0002_seed_data
-photos
- [X] 0001_initial
- [X] 0002_seed_data
+Operations to perform:
+  Apply all migrations: photos
+Running migrations:
+  No migrations to apply.
