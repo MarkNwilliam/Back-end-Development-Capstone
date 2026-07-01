@@ -1,8 +1,7 @@
 Operations to perform:
-  Apply all migrations: songs
+  Apply all migrations: songs, photos
 Running migrations:
-  No migrations to apply.
-Operations to perform:
-  Apply all migrations: photos
-Running migrations:
-  No migrations to apply.
+  Applying photos.0001_initial... OK
+  Applying photos.0002_seed_data... OK
+  Applying songs.0001_initial... OK
+  Applying songs.0002_seed_data... OK
